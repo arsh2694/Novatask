@@ -1,0 +1,6 @@
+{
+  "name": "NovaTask Kanban",
+  "description": "A high-performance technical Kanban issue tracker with local persistence, drag-and-drop, and priority-driven task management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
