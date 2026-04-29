@@ -254,6 +254,24 @@ export default function App() {
           v1.2.4-STABLE // PERSISTENCE LAYER READY
         </div>
       </footer>
+
+      {/* Modal Overlay System */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <IssueModal 
+            issue={editingIssue}
+            onSubmit={(data) => {
+              if (editingIssue) {
+                updateIssue(editingIssue.id, data);
+              } else {
+                addIssue(data);
+              }
+              setIsModalOpen(false);
+            }}
+            onClose={() => setIsModalOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -299,13 +317,13 @@ function IssueCard({ issue, onEdit, onDelete, onDragStart }: {
         </span>
         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <button 
-            onClick={onEdit}
+            onClick={(e) => { e.stopPropagation(); onEdit(); }}
             className="p-1.5 hover:bg-white/5 rounded-full transition-colors text-zinc-500 hover:text-zinc-100"
           >
             <Edit3 className="w-3.5 h-3.5" />
           </button>
           <button 
-            onClick={onDelete}
+            onClick={(e) => { e.stopPropagation(); onDelete(); }}
             className="p-1.5 hover:bg-rose-500/10 rounded-full transition-colors text-zinc-500 hover:text-rose-400"
           >
             <Trash2 className="w-3.5 h-3.5" />
